@@ -1,5 +1,2 @@
 # password-manager
-
-TODO:
-    - Flowdiagram
-    - 
+Stor inspiration fra diverse password managers herunder Bitwarden.

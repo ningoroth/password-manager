@@ -80,10 +80,16 @@ class Generator(tk.Frame):
         label = ttk.Label(self, text="Generator", font=LARGEFONT, foreground=white, background=gray)
         label.grid(row=0, column=4, padx=10, pady=10)
 
-        button = ttk.Button(self, text="Front Page",
-        command = lambda : controller.showFrame(FrontPage))
-        
-        button.grid(row=1, column=1, padx=10, pady=10)
+        back_button = ttk.Button(self, text="Front Page", command=lambda:controller.showFrame(FrontPage))
+        back_button.grid(row=1, column=1, padx=10, pady=10)
+
+        generate_button = tk.Button(self, text="Generate", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(Generator))
+        #button1.grid(row=1, column=1, padx=10, pady=10)
+        generate_button.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
+
+
+
+
 
 class AddElement(tk.Frame):
     def __init__(self, parent, controller):
@@ -92,7 +98,7 @@ class AddElement(tk.Frame):
         label = ttk.Label(self, text="Add Element", font=LARGEFONT, foreground=white, background=gray)
         label.grid(row=0, column=4, padx=10, pady=10)
 
-        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
+        button = tk.Button(self, text="Front Page", command=lambda:controller.showFrame(FrontPage))
         button.grid(row=1, column=1, padx=10, pady=10)
 
 screen = TkinterApp()

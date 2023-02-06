@@ -14,16 +14,10 @@ darkergray = "#363636"
 gray = "#3D3D3D"
 
 LARGEFONT = ("Helvetica", 35)
-'''
-def passwordGenerator():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-    'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-    'U', 'V', 'W', 'X', 'Y', 'Z']
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    symbols = ['!', '@', '#', '$', '%', '^', '&', '*']
-'''
+
+thicc_check = False
+letters_check = False
+symbols_check = False
 
 class TkinterApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -74,6 +68,18 @@ class FrontPage(tk.Frame):
 
 
 class Generator(tk.Frame):
+    def passwordGenerator():
+        smol_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+                        'w', 'x', 'y', 'z']
+        thicc_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+                        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                        'U', 'V', 'W', 'X', 'Y', 'Z']
+        numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        symbols = ['!', '@', '#', '$', '%', '^', '&', '*']
+
+        print(thicc_check)
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
@@ -83,12 +89,18 @@ class Generator(tk.Frame):
         back_button = ttk.Button(self, text="Front Page", command=lambda:controller.showFrame(FrontPage))
         back_button.grid(row=1, column=1, padx=10, pady=10)
 
-        generate_button = tk.Button(self, text="Generate", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(Generator))
+        generate_button = tk.Button(self, text="Generate", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=Generator.passwordGenerator)
         #button1.grid(row=1, column=1, padx=10, pady=10)
         generate_button.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
 
+        thicc_checkbox = tk.Checkbutton(self, text="A-Z", variable=thicc_check)
+        thicc_checkbox.place(relx=0.4, rely=0.5)
 
+        letters_checkbox = tk.Checkbutton(self, text="0-9", variable=letters_check)
+        letters_checkbox.place(relx=0.4, rely=0.6)
 
+        symbols_checkbox = tk.Checkbutton(self, text="!@#$%^&*", variable=symbols_check)
+        symbols_checkbox.place(relx=0.4, rely=0.7)
 
 
 class AddElement(tk.Frame):
@@ -102,7 +114,8 @@ class AddElement(tk.Frame):
         button.grid(row=1, column=1, padx=10, pady=10)
 
 screen = TkinterApp()
-screen.geometry("700x350")
+screen.geometry("700x750")
+screen.resizable(False, False)
 screen.title("Password Manager")
 icon = tk.PhotoImage(file='assets\icon.png')
 screen.wm_iconphoto(False, icon)

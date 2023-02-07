@@ -15,9 +15,9 @@ gray = "#3D3D3D"
 
 LARGEFONT = ("Helvetica", 35)
 
-thicc_check = False
-letters_check = False
-symbols_check = False
+thicc_check = None
+letters_check = None
+symbols_check = None
 
 class TkinterApp(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -77,8 +77,6 @@ class Generator(tk.Frame):
                         'U', 'V', 'W', 'X', 'Y', 'Z']
         numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         symbols = ['!', '@', '#', '$', '%', '^', '&', '*']
-
-        print(thicc_check)
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)

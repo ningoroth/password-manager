@@ -15,10 +15,6 @@ gray = "#3D3D3D"
 
 LARGEFONT = ("Helvetica", 35)
 
-thicc_check = None
-letters_check = None
-symbols_check = None
-
 class TkinterApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -77,6 +73,32 @@ class Generator(tk.Frame):
         numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         symbols = ['!', '@', '#', '$', '%', '^', '&', '*']
 
+        length = 10
+
+        all = smol_letters + thicc_letters + numbers + symbols
+
+        temp = random.sample(all, length)
+
+        password = "".join(temp)
+
+        print(password)
+
+        #password_letters = [random.choice(letters) for _ in range(randint(8, 10))]
+        #password_symbols = [random.choice(symbols) for _ in range(randint(2, 4))]
+        #password_numbers = [random.choice(numbers) for _ in range(randint(2, 4))]
+
+        # add all password in a list
+        #password_list = password_letters + password_symbols + password_numbers
+        # shuffle those generated password in the list
+        #shuffle(password_list)
+
+        # join password
+        #password = "".join(password_list)
+        # show generated password in the password label field
+        #password_entry.insert(0, password)
+        # copy password on the clipboard automatically
+        #pyperclip.copy(password)
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
@@ -90,14 +112,19 @@ class Generator(tk.Frame):
         #button1.grid(row=1, column=1, padx=10, pady=10)
         generate_button.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
 
-        thicc_checkbox = tk.Checkbutton(self, text="A-Z", variable=thicc_check)
+        thicc_checkbox = tk.Checkbutton(self, text="A-Z")
         thicc_checkbox.place(relx=0.4, rely=0.5)
 
-        letters_checkbox = tk.Checkbutton(self, text="0-9", variable=letters_check)
+        letters_checkbox = tk.Checkbutton(self, text="0-9")
         letters_checkbox.place(relx=0.4, rely=0.6)
 
-        symbols_checkbox = tk.Checkbutton(self, text="!@#$%^&*", variable=symbols_check)
+        symbols_checkbox = tk.Checkbutton(self, text="!@#$%^&*")
         symbols_checkbox.place(relx=0.4, rely=0.7)
+
+        length_scale = tk.Scale(self, from_=0, to=200, orient='horizontal')
+        length_scale.place(relx=0.4, rely=0.8)
+
+        length_value = length_scale.get()
 
 
 class AddElement(tk.Frame):

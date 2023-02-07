@@ -60,17 +60,17 @@ class FrontPage(tk.Frame):
         #style.configure("W.TButton", font=('calibri', 10, 'bold', 'underline'), background='red')
 
         button1 = tk.Button(self, text="Generator", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(Generator))
-        #button1.grid(row=1, column=1, padx=10, pady=10)
-        button1.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
+        button1.place(relx=0.5, rely=0.78, anchor="center", width=300, height=50)
 
         button2 = tk.Button(self, text="Add Element", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(AddElement))
-        button2.place(relx=0.5, rely=0.62, anchor="n", width=300, height=50)
+        button2.place(relx=0.5, rely=0.85, anchor="center", width=300, height=50)
 
         search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(relx=0.5, rely=0.4, anchor="n", width=300, height=50)
+        search_entry.place(relx=0.57, rely=0.6, anchor="e", width=200, height=50)
 
         search_button = tk.Button(self, text="Search", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white)
-        search_button.place(relx=0.55, rely=0.4, anchor="n", width=100, height=50)
+        search_button.place(relx=0.57, rely=0.6, anchor="w", width=100, height=50)
+
 
 
 class Generator(tk.Frame):
@@ -95,8 +95,33 @@ class AddElement(tk.Frame):
         button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
         button.grid(row=1, column=1, padx=10, pady=10)
 
+        label = ttk.Label(self, text="Website", font=LARGEFONT, foreground=white, background=gray)
+        label.place(x=175, y=75)
+
+        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry.place(x=360, y=150, anchor="e", width=200, height=25)
+
+
+        label = ttk.Label(self, text="Email", font=LARGEFONT, foreground=white, background=gray)
+        label.place(x=175, y=180 )
+
+        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry.place(x=360, y=250, anchor="e", width=200, height=25)
+
+
+        label = ttk.Label(self, text="Password", font=LARGEFONT, foreground=white, background=gray)
+        label.place(x=175, y=275)
+
+        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry.place(x=360, y=350, anchor="e", width=200, height=25)
+
+        button = tk.Button(self, text="ADD", command = lambda : controller.showFrame(FrontPage))
+        button.place(x=600, y=600)
+
+
 screen = TkinterApp()
-screen.geometry("700x350")
+screen.geometry("700x750")
+screen.resizable(False,False)
 screen.title("Password Manager")
 icon = tk.PhotoImage(file='assets\icon.png')
 screen.wm_iconphoto(False, icon)

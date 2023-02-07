@@ -54,17 +54,16 @@ class FrontPage(tk.Frame):
         #style.configure("W.TButton", font=('calibri', 10, 'bold', 'underline'), background='red')
 
         button1 = tk.Button(self, text="Generator", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(Generator))
-        #button1.grid(row=1, column=1, padx=10, pady=10)
-        button1.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
+        button1.place(relx=0.5, rely=0.78, anchor="center", width=300, height=50)
 
         button2 = tk.Button(self, text="Add Element", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(AddElement))
-        button2.place(relx=0.5, rely=0.62, anchor="n", width=300, height=50)
+        button2.place(relx=0.5, rely=0.85, anchor="center", width=300, height=50)
 
         search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(relx=0.5, rely=0.4, anchor="n", width=300, height=50)
+        search_entry.place(relx=0.57, rely=0.6, anchor="e", width=200, height=50)
 
         search_button = tk.Button(self, text="Search", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white)
-        search_button.place(relx=0.55, rely=0.4, anchor="n", width=100, height=50)
+        search_button.place(relx=0.57, rely=0.6, anchor="w", width=100, height=50)
 
 
 class Generator(tk.Frame):

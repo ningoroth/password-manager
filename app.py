@@ -1,7 +1,8 @@
 ## Imports ##
 import tkinter as tk
 from tkinter import ttk
-import random
+import secrets
+import string
 import sqlite3
 import pyperclip
 
@@ -63,42 +64,6 @@ class FrontPage(tk.Frame):
 
 
 class Generator(tk.Frame):
-    def passwordGenerator():
-        smol_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-                        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-                        'w', 'x', 'y', 'z']
-        thicc_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-                        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                        'U', 'V', 'W', 'X', 'Y', 'Z']
-        numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-        symbols = ['!', '@', '#', '$', '%', '^', '&', '*']
-
-        length = 10
-
-        all = smol_letters + thicc_letters + numbers + symbols
-
-        temp = random.sample(all, length)
-
-        password = "".join(temp)
-
-        print(password)
-
-        #password_letters = [random.choice(letters) for _ in range(randint(8, 10))]
-        #password_symbols = [random.choice(symbols) for _ in range(randint(2, 4))]
-        #password_numbers = [random.choice(numbers) for _ in range(randint(2, 4))]
-
-        # add all password in a list
-        #password_list = password_letters + password_symbols + password_numbers
-        # shuffle those generated password in the list
-        #shuffle(password_list)
-
-        # join password
-        #password = "".join(password_list)
-        # show generated password in the password label field
-        #password_entry.insert(0, password)
-        # copy password on the clipboard automatically
-        #pyperclip.copy(password)
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
@@ -108,23 +73,64 @@ class Generator(tk.Frame):
         back_button = ttk.Button(self, text="Front Page", command=lambda:controller.showFrame(FrontPage))
         back_button.grid(row=1, column=1, padx=10, pady=10)
 
-        generate_button = tk.Button(self, text="Generate", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=Generator.passwordGenerator)
-        #button1.grid(row=1, column=1, padx=10, pady=10)
+        generate_button = tk.Button(self, text="Generate", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=self.passwordGenerator)
         generate_button.place(relx=0.5, rely=0.6, anchor="s", width=300, height=50)
 
-        thicc_checkbox = tk.Checkbutton(self, text="A-Z")
+        self.thicc_check = tk.BooleanVar()
+        thicc_checkbox = tk.Checkbutton(self, text="A-Z", variable=self.thicc_check)
         thicc_checkbox.place(relx=0.4, rely=0.5)
 
-        letters_checkbox = tk.Checkbutton(self, text="0-9")
-        letters_checkbox.place(relx=0.4, rely=0.6)
+        self.numbers_check = tk.BooleanVar()
+        numbers_checkbox = tk.Checkbutton(self, text="0-9", variable=self.numbers_check)
+        numbers_checkbox.place(relx=0.4, rely=0.6)
 
-        symbols_checkbox = tk.Checkbutton(self, text="!@#$%^&*")
+        self.symbols_check = tk.BooleanVar()
+        symbols_checkbox = tk.Checkbutton(self, text="!@#$%^&*", variable=self.symbols_check)
         symbols_checkbox.place(relx=0.4, rely=0.7)
 
-        length_scale = tk.Scale(self, from_=0, to=200, orient='horizontal')
+        self.length_var = tk.IntVar()
+        length_scale = tk.Scale(self, from_=1, to=100, orient='horizontal', variable=self.length_var)
         length_scale.place(relx=0.4, rely=0.8)
 
-        length_value = length_scale.get()
+        self.entry = tk.Text(self)
+        self.entry.place(x=100, y=100, width=200, height=50)
+    
+    def passwordGenerator(self):
+        length = self.length_var.get()
+        thicc_check = self.thicc_check.get()
+        numbers_check = self.numbers_check.get()
+        symbols_check = self.symbols_check.get()
+
+        smol_letters = string.ascii_lowercase
+
+        if thicc_check == True:
+            thicc_letters = string.ascii_uppercase
+        else:
+            thicc_letters = ""
+
+        if numbers_check == True:
+            numbers = string.digits
+        else:
+            numbers = ""
+
+        if symbols_check == True:
+            symbols = string.punctuation
+        else:
+            symbols = ""
+
+        all = smol_letters + thicc_letters + numbers + symbols
+
+        password = ""
+        for i in range(length):
+            password += "".join(secrets.choice(all))
+
+        self.entry.configure(state='normal')
+        self.entry.delete(1.0, 'end')
+        self.entry.insert('end', password)
+        self.entry.configure(state='disabled')
+
+        print(password)
+        pyperclip.copy(password)
 
 
 class AddElement(tk.Frame):

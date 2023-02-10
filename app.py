@@ -31,7 +31,7 @@ class TkinterApp(tk.Tk):
 
         self.frames = {}
 
-        for F in (FrontPage, Generator, AddElement):
+        for F in (FrontPage, Generator, AddElement, ShowElement):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -356,6 +356,25 @@ class AddElement(tk.Frame):
         )
         add_button.place(x=600, y=600)
 
+        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
+        button.grid(row=1, column=1, padx=10, pady=10)
+    
+class ShowElement(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, background=gray)
+
+        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry.place(relx=0.57, rely=0.3, anchor="e", width=300, height=50)
+
+        search_entry2 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry2.place(relx=0.57, rely=0.5, anchor="e", width=300, height=50)
+
+        search_entry3 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry3.place(relx=0.57, rely=0.7, anchor="e", width=300, height=50)
+
+
+        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
+        button.grid(row=1, column=1, padx=10, pady=10)
 
 screen = TkinterApp()
 screen.geometry("700x750")

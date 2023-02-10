@@ -20,6 +20,18 @@ standard_font = ("Helvetica", 18)
 button_width = 300
 button_height = 50
 
+def get_db():
+    connection = None
+    try:
+        connection = sqlite3.connect("database.db")
+    except sqlite3.Error as error:
+        print(error)
+
+    return connection
+
+#def get_db():
+#    sqlite3.connect("database.db")
+
 class TkinterApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -330,27 +342,27 @@ class AddElement(tk.Frame):
         )
         website_label.place(x=175, y=100)
 
-        website_entry = tk.Entry(
+        self.website_entry = tk.Entry(
             self, 
             font = standard_font,
         )
-        website_entry.place(x=360, y=175, anchor="e", width=200, height=25)
+        self.website_entry.place(x=360, y=175, anchor="e", width=200, height=25)
 
 
-        email_label = tk.Label(
+        username_label = tk.Label(
             self, 
-            text = "Email", 
+            text = "Username", 
             font = title_font, 
             foreground = white, 
             background = gray,
         )
-        email_label.place(x=175, y=200)
+        username_label.place(x=175, y=200)
 
-        email_entry = tk.Entry(
+        self.username_entry = tk.Entry(
             self, 
             font = standard_font,
         )
-        email_entry.place(x=360, y=275, anchor="e", width=200, height=25)
+        self.username_entry.place(x=360, y=275, anchor="e", width=200, height=25)
 
 
         password_label = tk.Label(
@@ -362,18 +374,34 @@ class AddElement(tk.Frame):
         )
         password_label.place(x=175, y=300)
 
-        password_entry = tk.Entry(
+        self.password_entry = tk.Entry(
             self, 
             font = standard_font,
+            show="*",
         )
-        password_entry.place(x=360, y=375, anchor="e", width=200, height=25)
+        self.password_entry.place(x=360, y=375, anchor="e", width=200, height=25)
 
         add_button = tk.Button(
             self, 
             text = "ADD", 
-            command = lambda:controller.showFrame(FrontPage),
+            command = self.getValues,
         )
         add_button.place(x=600, y=600)
+    
+    def getValues(self):
+        website_value = self.website_entry.get()
+        username_value = self.username_entry.get()
+        password_value = self.password_entry.get()
+
+        # Send to database
+        db = get_db()
+        db.execute("INSERT INTO Elements (username, password, website) VALUES (?,?,?);",
+            (username_value, password_value, website_value)
+        )
+        db.commit()
+
+
+
     
 class ShowElement(tk.Frame):
     def __init__(self, parent, controller):

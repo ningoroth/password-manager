@@ -302,53 +302,59 @@ class AddElement(tk.Frame):
         )
         back_button.place(x=0, y=0, anchor="nw", width=100, height=50)
 
+        label = tk.Label(
+            self, 
+            text = "Website", 
+            font = title_font, 
+            foreground = white, 
+            background = gray
+        )
+        label.place(x=175, y=100)
 
-        label = ttk.Label(self, text="Website", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=75)
-
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=150, anchor="e", width=200, height=25)
-
-
-        label = ttk.Label(self, text="Email", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=180 )
-
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=250, anchor="e", width=200, height=25)
-
-
-        label = ttk.Label(self, text="Password", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=275)
-
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=350, anchor="e", width=200, height=25)
-
-        button = tk.Button(self, text="ADD", command = lambda : controller.showFrame(FrontPage))
-        button.place(x=600, y=600)
+        search_entry = tk.Entry(
+            self, 
+            font = standard_font
+        )
+        search_entry.place(x=360, y=175, anchor="e", width=200, height=25)
 
 
-        label = ttk.Label(self, text="Website", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=75)
+        label = tk.Label(
+            self, 
+            text = "Email", 
+            font = title_font, 
+            foreground = white, 
+            background = gray
+        )
+        label.place(x=175, y=200)
 
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=150, anchor="e", width=200, height=25)
+        search_entry = tk.Entry(
+            self, 
+            font = standard_font
+        )
+        search_entry.place(x=360, y=275, anchor="e", width=200, height=25)
 
 
-        label = ttk.Label(self, text="Email", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=180 )
+        label = tk.Label(
+            self, 
+            text = "Password", 
+            font = title_font, 
+            foreground = white, 
+            background = gray
+        )
+        label.place(x=175, y=300)
 
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=250, anchor="e", width=200, height=25)
+        search_entry = tk.Entry(
+            self, 
+            font = standard_font
+        )
+        search_entry.place(x=360, y=375, anchor="e", width=200, height=25)
 
-
-        label = ttk.Label(self, text="Password", font=LARGEFONT, foreground=white, background=gray)
-        label.place(x=175, y=275)
-
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
-        search_entry.place(x=360, y=350, anchor="e", width=200, height=25)
-
-        button = tk.Button(self, text="ADD", command = lambda : controller.showFrame(FrontPage))
-        button.place(x=600, y=600)
+        add_button = tk.Button(
+            self, 
+            text = "ADD", 
+            command = lambda : controller.showFrame(FrontPage)
+        )
+        add_button.place(x=600, y=600)
 
 
 screen = TkinterApp()

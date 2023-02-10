@@ -36,7 +36,7 @@ class TkinterApp(tk.Tk):
 
         self.frames = {}
 
-        for F in (FrontPage, Generator, AddElement):
+        for F in (FrontPage, Generator, AddElement, ShowElement):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -65,16 +65,14 @@ class FrontPage(tk.Frame):
         button2 = tk.Button(self, text="Add Element", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(AddElement))
         button2.place(relx=0.5, rely=0.85, anchor="center", width=300, height=50)
 
+        button3 = tk.Button(self, text="Show Element", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white, command=lambda:controller.showFrame(ShowElement))
+        button3.place(relx=0.5, rely=0.95, anchor="center", width=300, height=50)
+
         search_entry = tk.Entry(self, font=("Helvetica", 18))
         search_entry.place(relx=0.57, rely=0.6, anchor="e", width=200, height=50)
 
         search_button = tk.Button(self, text="Search", font=('Helvetica', 18, 'bold'), bg=darkergray, fg=white)
-        search_button.place(relx=0.57, rely=0.6, anchor="w", width=100, height=50)
-
-        canvas = tk.Canvas(self, width = 300, height = 300)      
-        canvas.pack()   
-        img = tk.PhotoImage(file="assets\icon.png")      
-        canvas.create_image(20,20, anchor='nw', image=img)  
+        search_button.place(relx=0.57, rely=0.6, anchor="w", width=100, height=50) 
 
 
 class Generator(tk.Frame):
@@ -95,6 +93,23 @@ class AddElement(tk.Frame):
 
         label = ttk.Label(self, text="Add Element", font=LARGEFONT, foreground=white, background=gray)
         label.grid(row=0, column=4, padx=10, pady=10)
+
+        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
+        button.grid(row=1, column=1, padx=10, pady=10)
+    
+class ShowElement(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, background=gray)
+
+        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry.place(relx=0.57, rely=0.3, anchor="e", width=300, height=50)
+
+        search_entry2 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry2.place(relx=0.57, rely=0.5, anchor="e", width=300, height=50)
+
+        search_entry3 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry3.place(relx=0.57, rely=0.7, anchor="e", width=300, height=50)
+
 
         button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
         button.grid(row=1, column=1, padx=10, pady=10)

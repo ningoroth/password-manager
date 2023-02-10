@@ -82,7 +82,20 @@ class FrontPage(tk.Frame):
             activeforeground = white,
             command = lambda:controller.showFrame(AddElement)
         )
-        addElement_button.place(relx=0.5, rely=0.85, anchor="center", width=button_width, height=button_height)
+        addElement_button.place(relx=0.5, rely=0.86, anchor="center", width=button_width, height=button_height)
+
+        # Show Element Button TEMP
+        showElement_button = tk.Button(
+            self, 
+            text = "TEMP Show Element", 
+            font = standard_font, 
+            background = darkergray, 
+            foreground = white, 
+            activebackground = darkgray,
+            activeforeground = white,
+            command = lambda:controller.showFrame(ShowElement)
+        )
+        showElement_button.place(relx=0.5, rely=0.94, anchor="center", width=button_width, height=button_height)
 
         # Search Entry Field
         search_entry = tk.Entry(
@@ -286,94 +299,109 @@ class AddElement(tk.Frame):
 
         ## GUI ##
         # Add Element Title
-        addElement_title = tk.Label(self, text="Add Element", font=title_font, foreground=white, background=gray)
+        addElement_title = tk.Label(
+            self, 
+            text = "Add Element", 
+            font = title_font, 
+            foreground = white, 
+            background = gray
+        )
         addElement_title.place(relx=0.5, rely=0.1, anchor="center")
 
         # Back Button
         back_button = tk.Button(
             self, 
-            text="Back", 
-            font=standard_font, 
-            background=darkergray, 
-            foreground=white,
+            text = "Back", 
+            font = standard_font, 
+            background = darkergray, 
+            foreground = white,
             activebackground = darkgray,
             activeforeground = white,
-            command=lambda:controller.showFrame(FrontPage)
+            command = lambda:controller.showFrame(FrontPage),
         )
         back_button.place(x=0, y=0, anchor="nw", width=100, height=50)
 
-        label = tk.Label(
+        website_label = tk.Label(
             self, 
             text = "Website", 
             font = title_font, 
             foreground = white, 
-            background = gray
+            background = gray,
         )
-        label.place(x=175, y=100)
+        website_label.place(x=175, y=100)
 
-        search_entry = tk.Entry(
+        website_entry = tk.Entry(
             self, 
-            font = standard_font
+            font = standard_font,
         )
-        search_entry.place(x=360, y=175, anchor="e", width=200, height=25)
+        website_entry.place(x=360, y=175, anchor="e", width=200, height=25)
 
 
-        label = tk.Label(
+        email_label = tk.Label(
             self, 
             text = "Email", 
             font = title_font, 
             foreground = white, 
-            background = gray
+            background = gray,
         )
-        label.place(x=175, y=200)
+        email_label.place(x=175, y=200)
 
-        search_entry = tk.Entry(
+        email_entry = tk.Entry(
             self, 
-            font = standard_font
+            font = standard_font,
         )
-        search_entry.place(x=360, y=275, anchor="e", width=200, height=25)
+        email_entry.place(x=360, y=275, anchor="e", width=200, height=25)
 
 
-        label = tk.Label(
+        password_label = tk.Label(
             self, 
             text = "Password", 
             font = title_font, 
             foreground = white, 
-            background = gray
+            background = gray,
         )
-        label.place(x=175, y=300)
+        password_label.place(x=175, y=300)
 
-        search_entry = tk.Entry(
+        password_entry = tk.Entry(
             self, 
-            font = standard_font
+            font = standard_font,
         )
-        search_entry.place(x=360, y=375, anchor="e", width=200, height=25)
+        password_entry.place(x=360, y=375, anchor="e", width=200, height=25)
 
         add_button = tk.Button(
             self, 
             text = "ADD", 
-            command = lambda : controller.showFrame(FrontPage)
+            command = lambda:controller.showFrame(FrontPage),
         )
         add_button.place(x=600, y=600)
-
-        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
-        button.grid(row=1, column=1, padx=10, pady=10)
     
 class ShowElement(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
-        search_entry = tk.Entry(self, font=("Helvetica", 18))
+        search_entry = tk.Entry(
+            self, 
+            font = standard_font,
+        )
         search_entry.place(relx=0.57, rely=0.3, anchor="e", width=300, height=50)
 
-        search_entry2 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry2 = tk.Entry(
+            self, 
+            font = standard_font,
+        )
         search_entry2.place(relx=0.57, rely=0.5, anchor="e", width=300, height=50)
 
-        search_entry3 = tk.Entry(self, font=("Helvetica", 18))
+        search_entry3 = tk.Entry(
+            self, 
+            font = standard_font,
+        )
         search_entry3.place(relx=0.57, rely=0.7, anchor="e", width=300, height=50)
 
-
-        button = tk.Button(self, text="Front Page", command = lambda : controller.showFrame(FrontPage))
+        button = tk.Button(
+            self, 
+            text = "Front Page", 
+            command = lambda:controller.showFrame(FrontPage),
+        )
         button.grid(row=1, column=1, padx=10, pady=10)
 
 screen = TkinterApp()

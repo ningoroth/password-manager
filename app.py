@@ -340,13 +340,15 @@ class AddElement(tk.Frame):
             foreground = white, 
             background = gray,
         )
-        website_label.place(x=175, y=100)
+        website_label.place(relx=0.5, rely=0.25, anchor="center")
 
         self.website_entry = tk.Entry(
             self, 
             font = standard_font,
+            background = darkergray,
+            foreground = white,
         )
-        self.website_entry.place(x=360, y=175, anchor="e", width=200, height=25)
+        self.website_entry.place(relx=0.5, rely=0.32, anchor="center", width=button_width, height=button_height)
 
 
         username_label = tk.Label(
@@ -356,13 +358,15 @@ class AddElement(tk.Frame):
             foreground = white, 
             background = gray,
         )
-        username_label.place(x=175, y=200)
+        username_label.place(relx=0.5, rely=0.45, anchor="center")
 
         self.username_entry = tk.Entry(
             self, 
             font = standard_font,
+            background = darkergray,
+            foreground = white,
         )
-        self.username_entry.place(x=360, y=275, anchor="e", width=200, height=25)
+        self.username_entry.place(relx=0.5, rely=0.52, anchor="center", width=button_width, height=button_height)
 
 
         password_label = tk.Label(
@@ -372,21 +376,30 @@ class AddElement(tk.Frame):
             foreground = white, 
             background = gray,
         )
-        password_label.place(x=175, y=300)
+        password_label.place(relx=0.5, rely=0.65, anchor="center")
 
         self.password_entry = tk.Entry(
             self, 
             font = standard_font,
-            show="*",
+            show="•",
+            background = darkergray,
+            foreground = white,
         )
-        self.password_entry.place(x=360, y=375, anchor="e", width=200, height=25)
+        self.password_entry.place(relx=0.5, rely=0.72, anchor="center", width=button_width, height=button_height)
+
+            
 
         add_button = tk.Button(
             self, 
-            text = "ADD", 
-            command = self.getValues,
+            text = "Add Element",
+            font = standard_font, 
+            background = darkergray, 
+            foreground = white,
+            activebackground = darkgray,
+            activeforeground = white,
+            #command = self.getValues,
         )
-        add_button.place(x=600, y=600)
+        add_button.place(relx=0.5, rely=0.85, anchor="center", width=button_width, height=button_height)
     
     def getValues(self):
         website_value = self.website_entry.get()
@@ -395,11 +408,8 @@ class AddElement(tk.Frame):
 
         # Send to database
         db = get_db()
-        db.execute("INSERT INTO Elements (username, password, website) VALUES (?,?,?);",
-            (username_value, password_value, website_value)
-        )
+        db.execute("INSERT INTO Elements (username, password, website) VALUES (?,?,?);", (username_value, password_value, website_value))
         db.commit()
-
 
 
     

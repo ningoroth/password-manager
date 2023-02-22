@@ -110,13 +110,13 @@ class FrontPage(tk.Frame):
         showElement_button.place(relx=0.5, rely=0.94, anchor="center", width=button_width, height=button_height)
 
         # Search Entry Field
-        search_entry = tk.Entry(
+        self.search_entry = tk.Entry(
             self, 
             font = standard_font,
             background = darkergray,
             foreground = white
         )
-        search_entry.place(relx=0.43, rely=0.6, anchor="center", width=button_width-100, height=button_height)
+        self.search_entry.place(relx=0.43, rely=0.6, anchor="center", width=button_width-100, height=button_height)
 
         # Search Button
         search_button = tk.Button(
@@ -127,8 +127,20 @@ class FrontPage(tk.Frame):
             foreground = white, 
             activebackground = darkgray,
             activeforeground = white,
+            command = self.search,
         )
         search_button.place(relx=0.64, rely=0.6, anchor="center", width=100, height=50)
+    
+    def search(self):
+        db = get_db()
+        cur = db.execute("SELECT username, password, website FROM Elements WHERE website=?", (self.search_entry.get(),))
+        elements = cur.fetchall()
+        
+        if self.search_entry.get() in elements:
+            for element in elements:
+                print(element[2] + "\nusername: " + element[0] + "\npassword: " + element[1] + "\n")
+        else:
+            print("error")
 
 
 class Generator(tk.Frame):
@@ -397,7 +409,7 @@ class AddElement(tk.Frame):
             foreground = white,
             activebackground = darkgray,
             activeforeground = white,
-            #command = self.getValues,
+            command = self.getValues,
         )
         add_button.place(relx=0.5, rely=0.85, anchor="center", width=button_width, height=button_height)
     
@@ -417,23 +429,23 @@ class ShowElement(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
-        search_entry = tk.Entry(
+        show_website = tk.Entry(
             self, 
             font = standard_font,
         )
-        search_entry.place(relx=0.57, rely=0.3, anchor="e", width=300, height=50)
+        show_website.place(relx=0.57, rely=0.3, anchor="e", width=300, height=50)
 
-        search_entry2 = tk.Entry(
+        show_username = tk.Entry(
             self, 
             font = standard_font,
         )
-        search_entry2.place(relx=0.57, rely=0.5, anchor="e", width=300, height=50)
+        show_username.place(relx=0.57, rely=0.5, anchor="e", width=300, height=50)
 
-        search_entry3 = tk.Entry(
+        show_password = tk.Entry(
             self, 
             font = standard_font,
         )
-        search_entry3.place(relx=0.57, rely=0.7, anchor="e", width=300, height=50)
+        show_password.place(relx=0.57, rely=0.7, anchor="e", width=300, height=50)
 
         button = tk.Button(
             self, 

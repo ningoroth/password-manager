@@ -43,7 +43,7 @@ class TkinterApp(tk.Tk):
 
         self.frames = {}
 
-        for F in (FrontPage, Generator, AddElement, ShowElement):
+        for F in (FrontPage, Generator, AddElement):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -96,19 +96,6 @@ class FrontPage(tk.Frame):
         )
         addElement_button.place(relx=0.5, rely=0.86, anchor="center", width=button_width, height=button_height)
 
-        # Show Element Button TEMP
-        showElement_button = tk.Button(
-            self, 
-            text = "TEMP Show Element", 
-            font = standard_font, 
-            background = darkergray, 
-            foreground = white, 
-            activebackground = darkgray,
-            activeforeground = white,
-            command = lambda:controller.showFrame(ShowElement)
-        )
-        showElement_button.place(relx=0.5, rely=0.94, anchor="center", width=button_width, height=button_height)
-
         # Search Entry Field
         self.search_entry = tk.Entry(
             self, 
@@ -136,11 +123,14 @@ class FrontPage(tk.Frame):
         cur = db.execute("SELECT username, password, website FROM Elements WHERE website=?", (self.search_entry.get(),))
         elements = cur.fetchall()
         
-        if self.search_entry.get() in elements:
-            for element in elements:
-                print(element[2] + "\nusername: " + element[0] + "\npassword: " + element[1] + "\n")
-        else:
-            print("error")
+        # Error detection (WIP)
+        #if self.search_entry.get() in elements:
+        # Vis element
+        for element in elements:
+            print(element[2] + "\nusername: " + element[0] + "\npassword: " + element[1])
+        #else:
+        #    print(elements)
+        #    print(self.search_entry.get())
 
 
 class Generator(tk.Frame):
@@ -425,7 +415,7 @@ class AddElement(tk.Frame):
 
 
     
-class ShowElement(tk.Frame):
+'''class ShowElement(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
 
@@ -452,7 +442,7 @@ class ShowElement(tk.Frame):
             text = "Front Page", 
             command = lambda:controller.showFrame(FrontPage),
         )
-        button.grid(row=1, column=1, padx=10, pady=10)
+        button.grid(row=1, column=1, padx=10, pady=10)'''
 
 screen = TkinterApp()
 screen.geometry("700x750")

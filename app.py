@@ -127,7 +127,7 @@ class FrontPage(tk.Frame):
         #if self.search_entry.get() in elements:
         # Vis element
         for element in elements:
-            print(element[2] + "\nusername: " + element[0] + "\npassword: " + element[1])
+            print("website: " + element[2] + "\nusername: " + element[0] + "\npassword: " + element[1])
         #else:
         #    print(elements)
         #    print(self.search_entry.get())
@@ -305,6 +305,7 @@ class Generator(tk.Frame):
     
     def copyPassword(self):
         pyperclip.copy(self.password)
+        print("Password copied to clipboard.")
 
 
 class AddElement(tk.Frame):
@@ -389,8 +390,6 @@ class AddElement(tk.Frame):
         )
         self.password_entry.place(relx=0.5, rely=0.72, anchor="center", width=button_width, height=button_height)
 
-            
-
         add_button = tk.Button(
             self, 
             text = "Add Element",
@@ -412,9 +411,9 @@ class AddElement(tk.Frame):
         db = get_db()
         db.execute("INSERT INTO Elements (username, password, website) VALUES (?,?,?);", (username_value, password_value, website_value))
         db.commit()
+        print(f"Data added to " + website_value)
 
 
-    
 '''class ShowElement(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, background=gray)
